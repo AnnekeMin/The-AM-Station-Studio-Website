@@ -1,90 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Checkout — The AM Station Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#f7f6f3;--text:#1f2937;--muted:#6b7280;--card:#fff;--shadow:0 10px 30px rgba(0,0,0,.06);--radius:18px;--accent:#0f766e}
-    *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;line-height:1.6}
-    h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:#0b1016}
-    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-    .container{max-width:1200px;margin:0 auto;padding:24px}
-    header.nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.9);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .logo{display:flex;align-items:center;gap:12px;font-weight:600}
-    .logo img{width:40px;height:40px;border-radius:10px;box-shadow:var(--shadow);object-fit:cover}
-    .nav-right{display:flex;gap:14px;align-items:center}
-    .pill{padding:10px 16px;border-radius:999px;background:var(--accent);color:#fff;box-shadow:var(--shadow);font-weight:600}
-    .cart-link{position:relative}.cart-count{position:absolute;top:-8px;right:-10px;background:#ef4444;color:#fff;border-radius:999px;padding:2px 6px;font-size:12px}
-    .hero{padding:40px 0 16px;text-align:center}
-    .table{width:100%;border-collapse:collapse}
-    .table th,.table td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}
-    .right{text-align:right}
-    .btn{padding:10px 14px;border-radius:12px;border:1px solid #0f766e22;background:#fff;color:var(--accent);font-weight:600;box-shadow:var(--shadow);cursor:pointer}
-    .btn.primary{background:var(--accent);color:#fff}
-    .btn[disabled]{opacity:.7;cursor:not-allowed}
-  </style>
-
-  <!-- Cart helpers (same as other pages) -->
-  <script>
-    const CART_KEY='am_station_cart';
-    function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]} }
-    function setCart(items){ localStorage.setItem(CART_KEY, JSON.stringify(items)); updateCartCount(); }
-    function removeFromCart(sku){ setCart(getCart().filter(x=>x.sku!==sku)); }
-    function updateQty(sku,qty){ const items=getCart().map(x=>x.sku===sku?{...x,qty:Math.max(1,qty)}:x); setCart(items); }
-    function cartTotal(){ return getCart().reduce((t,x)=>t+x.price*x.qty,0); }
-    function formatCurrency(n){ return '$'+n.toFixed(2); }
-    function updateCartCount(){ const n=getCart().reduce((t,x)=>t+x.qty,0); document.querySelectorAll('.cart-count').forEach(b=>b.textContent=n); }
-    window.addEventListener('DOMContentLoaded',updateCartCount);
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Minott Press</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <div class="logo">
-        <img src="images/logo-am-station.png" alt="AM Station Studio logo" />
-        <div><div style="font-size:14px;color:#6b7280;letter-spacing:.08em;">THE</div><div style="font-size:20px;">AM Station Studio</div></div>
-      </div>
-      <div class="nav-right">
-        <a href="index.html">Home</a>
-        <a href="books.html">Books</a>
-        <a href="designs.html">Designs</a>
-        <a href="production.html">Production</a>
-        <a class="cart-link" href="checkout.html"><strong>Cart</strong> <span class="cart-count">0</span></a>
-        <a class="pill" href="annekemin44@gmail.com">Contact</a>
-      </div>
-    </div>
+<body class="checkout-theme">
+  <header>
+    <h1>📚 Minott Press</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="books.html">Books</a>
+      <a href="designs.html">Designs</a>
+      <a href="production.html">Production</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <div class="container"><h1>Your Cart</h1></div>
-  </section>
+  <main>
+    <h2>Buy Our Books</h2>
+    <p>
+      Our books are available for purchase through <strong>Amazon</strong>.  
+      Click below to browse the collection and complete your order directly on Amazon.
+    </p>
+    <a class="btn primary" href="books.html">Go to Books</a>
+  </main>
 
-  <section class="container">
-    <table class="table" id="cartTable">
-      <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th class="right">Subtotal</th><th></th></tr></thead>
-      <tbody></tbody>
-    </table>
-    <div style="display:flex;justify-content:flex-end;gap:16px;align-items:center;margin-top:16px;">
-      <strong id="total">$0.00</strong>
- <button class="btn primary" onclick="startCheckout()">Proceed to Checkout</button>
-<script>
-async function startCheckout(){
-  const items = (JSON.parse(localStorage.getItem('am_station_cart')||'[]'))
-    .map(x => ({ sku: x.sku, qty: x.qty }));
-  if (!items.length) { alert('Your cart is empty.'); return; }
-
-  const res = await fetch('/api/checkout', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ items })
-  });
-  const data = await res.json();
-  if (data.url) location.href = data.url; else alert(data.error || 'Checkout error');
-}
-</script>
-
+  <footer>
+    <p>© 2025 Minott Press | Part of The AM Station Studio</p>
+  </footer>
 </body>
 </html>
