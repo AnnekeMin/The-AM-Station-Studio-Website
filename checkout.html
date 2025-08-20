@@ -67,19 +67,18 @@
     </table>
     <div style="display:flex;justify-content:flex-end;gap:16px;align-items:center;margin-top:16px;">
       <strong id="total">$0.00</strong>
-      <button class="btn primary" onclick="alert('Demo checkout — I can hook up Stripe or Shopify for you next.')">Proceed to Checkout</button>
+       <button class="btn primary" onclick="startCheckout()">Proceed to Checkout</button>
     </div>
   </section>
 
-                          </script>
-                  <button class="btn primary" onclick="startCheckout()">Proceed to Checkout</button>
-                
-                        <script>
-                            async function startCheckout(){
-                              const items = getCart().map(x => ({
-                          sku: x.sku,
-                        name: x.name,
-                       price: x.price,   // ideally you pass a price ID from Stripe, not raw amount
+          
+
+                <script>
+                async function startCheckout(){
+                  const items = getCart().map(x => ({
+                    sku: x.sku,
+                    name: x.name,
+                    price: x.price,   // ideally you pass a price ID from Stripe, not raw amount
                     qty: x.qty
                   }));
                   const res = await fetch('/.netlify/functions/stripe-checkout', {
@@ -93,34 +92,9 @@
                   } else {
                     alert('Checkout error — please try again.');
                   }
-                  <script>
-                    
-         <script>
-    function renderCart(){
-      const tbody=document.querySelector('#cartTable tbody'); tbody.innerHTML='';
-      const items=getCart();
-      items.forEach(x=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`
-          <td><div style="display:flex;align-items:center;gap:10px;">
-            <img src="${x.image||''}" alt="" style="width:52px;height:52px;object-fit:cover;border-radius:8px;" />
-            <div><strong>${x.name}</strong><div class="subtle">${x.sku}</div></div>
-          </div></td>
-          <td>${formatCurrency(x.price)}</td>
-          <td><input type="number" min="1" value="${x.qty}" style="width:70px"
-                onchange="updateQty('${x.sku}', parseInt(this.value||1)); renderCart();"></td>
-          <td class="right">${formatCurrency(x.price*x.qty)}</td>
-          <td class="right"><button class="btn" onclick="removeFromCart('${x.sku}'); renderCart();">Remove</button></td>
-        `;
-        tbody.appendChild(tr);
-      });
-      document.getElementById('total').textContent=formatCurrency(cartTotal());
-    }
-    window.addEventListener('DOMContentLoaded',renderCart);
-    
+                }
+                </script>
 
-}
-<script>
 
 </body>
 </html>
