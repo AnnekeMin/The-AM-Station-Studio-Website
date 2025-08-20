@@ -1,7 +1,1 @@
-{
-  "name": "am-station-studio",
-  "private": true,
-  "version": "1.0.0",
-  "license": "MIT",
-  "type": "module",
-  "dependencies": { "stripe": "^16.0.0" }
+{ "name":"am-station-studio", "private":true, "version":"1.0.0", "dependencies": { "stripe":"^16.0.0" } }
