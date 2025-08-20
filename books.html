@@ -127,17 +127,20 @@
             But when you do find out, was it better to be left in the dark? Or, is the adventure worth it?</p>
           <div class="price-row">
             <strong>$19.99</strong>
-            <button class="btn primary"
-              onclick="addToCart({sku:'BOOK-ROIB1-PB',name:'The Realm of Isla — Book One (Paperback)',price:19.99,image:'images/realm-of-isla-book1.jpg'})">
-              Add to Cart
-            </button>
+                          <!-- Shopify Buy Button embed (example snippet from Shopify) -->
+              <div id='product-component-1234567890'></div>
+              <script type="text/javascript">
+              /* Paste the exact Shopify script block you got here.
+                 It includes a script tag to load ShopifyBuy + a config with your product ID. */
+              </script>
+
           </div>
           <div class="price-row">
             <span class="subtle">Hardcover · Signed</span>
-            <--button class="btn"
+            <button class="btn"
               onclick="addToCart({sku:'BOOK-ROIB1-HC',name:'The Realm of Isla — Book One (Signed Hardcover)',price:29.99,image:'images/realm-of-isla-book1.jpg'})">
               $16.38
-            <--/button>
+            </button>
             <!-- Replace the button that calls addToCart(...) -->
               <a class="btn primary" href="https://buy.stripe.com/your_payment_link" target="_blank" rel="noopener">
                 Buy Now
