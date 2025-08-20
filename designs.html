@@ -68,4 +68,125 @@
         <a href="index.html">Home</a>
         <a href="books.html">Books</a>
         <a href="designs.html"><strong>Designs</strong></a>
-        <a href="production.html">Produc
+        <a href="production.html">Production</a>
+        <a class="pill" href="mailto:hello@amstationstudio.com">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>AM Designs — Portfolio & Consults</h1>
+      <p class="subtle">Designing spaces that tell your story.</p>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="container section">
+  <h2 style="margin:0 0 10px;">Portfolio</h2>
+  <div class="grid gallery">
+    <img src="images/designs/coastal-living-room.jpg" alt="Coastal Calm Living Room" />
+    <img src="images/designs/shadow-bedroom.jpg" alt="Shadow & Starlight Bedroom" />
+    <img src="images/designs/isla-kitchen.jpg" alt="Isla-Inspired Kitchen" />
+    <img src="images/designs/reading-nook.jpg" alt="Reader’s Nook in Oak & Sage" />
+  </div>
+</section>
+
+
+  <!-- SERVICE PACKAGES -->
+  <section class="container section">
+    <h2 style="margin:0 0 10px;">Services</h2>
+    <div class="grid">
+      <!-- E-Design Essentials with Stripe Buy Button -->
+      <article class="card">
+        <div class="body">
+          <h3>E-Design Essentials</h3>
+          <p class="subtle">One room. Moodboard, floor plan, clickable shopping list, 1 revision.</p>
+          <ul class="subtle" style="margin:8px 0 0 18px;">
+            <li>Ideal for DIY implementers</li>
+            <li>2–3 layout options</li>
+            <li>1:1 email support</li>
+          </ul>
+          <div class="price-row">
+            <strong>$349</strong>
+          </div>
+          <!-- Stripe Buy Button Embed -->
+          <stripe-buy-button
+            buy-button-id="buy_btn_1RyLSGJCvo8QGlE6e3oWYnp8"
+            publishable-key="pk_test_51RyKmlJCvo8QGlE6F7cdVyZPOAAm4wfhS0wSEJMd3R89ExKKq7Se9GX1l3QmOQqIZqDckgQkvHyE7oTjX6xTXLgv00VHHwGN5X">
+          </stripe-buy-button>
+        </div>
+      </article>
+
+      <!-- Color & Styling Session -->
+      <article class="card">
+        <div class="body">
+          <h3>Color & Styling Session</h3>
+          <p class="subtle">90-minute virtual consult. Paint, finishes, textiles, and styling guidance.</p>
+          <ul class="subtle" style="margin:8px 0 0 18px;">
+            <li>Live palette selection</li>
+            <li>Follow-up notes & links</li>
+            <li>Great pre-renovation</li>
+          </ul>
+          <div class="price-row">
+            <strong>$149</strong>
+            <a class="btn primary"
+               href="https://buy.stripe.com/YOUR_COLOR_SESSION_LINK"
+               target="_blank" rel="noopener">
+              Book Now
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Full Service -->
+      <article class="card">
+        <div class="body">
+          <h3>Full-Service Design</h3>
+          <p class="subtle">Concept to completion. Sourcing, drawings, trades coordination, styling.</p>
+          <ul class="subtle" style="margin:8px 0 0 18px;">
+            <li>On-site & virtual</li>
+            <li>Procurement management</li>
+            <li>Install day styling</li>
+          </ul>
+          <div class="price-row">
+            <strong>From $2,400</strong>
+            <a class="btn" href="mailto:hello@amstationstudio.com?subject=Full-Service%20Design%20Reservation">Reserve</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONSULTATION FORM -->
+  <section class="container section">
+    <div class="card">
+      <div class="body">
+        <h2 style="margin:0 0 6px;">Book a Design Consultation</h2>
+        <p class="subtle">Tell me about your project and I’ll reply by email.</p>
+        <form onsubmit="event.preventDefault(); alert('Thanks! I will email you to schedule.');">
+          <div class="grid" style="gap:12px;">
+            <div><label>Name<br/><input placeholder="Your full name" required></label></div>
+            <div><label>Email<br/><input type="email" placeholder="you@example.com" required></label></div>
+          </div>
+          <div><label>Project Type<br/><input placeholder="Living room refresh, full remodel, etc."></label></div>
+          <div><label>Message<br/><textarea rows="5" placeholder="Goals, budget, timeline…"></textarea></label></div>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="container footer">
+    <p>© <span id="year"></span> The AM Station Studio • AM Designs</p>
+  </section>
+
+  <!-- Stripe Buy Button Script -->
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
