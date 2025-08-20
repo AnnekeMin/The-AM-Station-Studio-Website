@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>M-C Production — Projects & Collaborations | The AM Station Studio</title>
+
+  <!-- Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f7f6f3; --text:#1f2937; --muted:#6b7280; --card:#fff;
+      --shadow:0 10px 30px rgba(0,0,0,.06); --radius:18px;
+      /* M-C Production accent (black–gold) */
+      --accent:#b48a1e;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;line-height:1.6}
+    h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:#0b1016}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:1200px;margin:0 auto;padding:24px}
+
+    /* Header / Nav (shared look) */
+    header.nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.9);
+      backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:600}
+    .logo img{width:40px;height:40px;border-radius:10px;box-shadow:var(--shadow);object-fit:cover}
+    .nav-right{display:flex;gap:14px;align-items:center}
+    .pill{padding:10px 16px;border-radius:999px;background:var(--accent);color:#fff;box-shadow:var(--shadow);font-weight:600}
+    .cart-link{position:relative}
+    .cart-count{position:absolute;top:-8px;right:-10px;background:#ef4444;color:#fff;border-radius:999px;padding:2px 6px;font-size:12px}
+
+    /* Hero */
+    .hero{padding:40px 0 8px;text-align:center}
+    .subtle{color:var(--muted)}
+
+    /* Grids + Cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .thumb{position:relative;margin:0;height:220px;background:#111}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.02)}
+    .badge{position:absolute;left:14px;top:14px;background:rgba(0,0,0,.75);color:#ffd76a;padding:6px 10px;border-radius:999px;font-size:12px;letter-spacing:.04em}
+    .body{padding:18px;display:grid;gap:10px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid #b48a1e22;background:#fff;color:var(--accent);font-weight:600;box-shadow:var(--shadow);cursor:pointer}
+    .btn.primary{background:var(--accent);color:#fff}
+
+    /* Sections */
+    .section{margin:24px 0 60px}
+
+    /* Forms */
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;background:#fff}
+    form{display:grid;gap:12px}
+
+    /* Footer */
+    .footer{padding:30px 0 60px;color:var(--muted);border-top:1px dashed #e5e7eb}
+  </style>
+
+  <!-- Cart utilities (shared across site) -->
+  <script>
+    const CART_KEY='am_station_cart';
+    function getCart(){ try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]} }
+    function setCart(items){ localStorage.setItem(CART_KEY, JSON.stringify(items)); updateCartCount(); }
+    function addToCart(item){
+      const items = getCart();
+      const i = items.findIndex(x=>x.sku===item.sku);
+      if(i>=0){ items[i].qty += item.qty||1; } else { items.push({...item, qty:item.qty||1}); }
+      setCart(items);
+      alert('Added to cart');
+    }
+    function updateCartCount(){
+      const n = getCart().reduce((t,x)=>t+x.qty,0);
+      document.querySelectorAll('.cart-count').forEach(b=>b.textContent=n);
+    }
+    window.addEventListener('DOMContentLoaded', updateCartCount);
+  </script>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <!-- Replace with your favicon/logo -->
+        <img src="images/logo-am-station.png" alt="AM Station Studio logo" />
+        <div>
+          <div style="font-size:14px;color:#6b7280;letter-spacing:.08em;">THE</div>
+          <div style="font-size:20px;">AM Station Studio</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="books.html">Books</a>
+        <a href="designs.html">Designs</a>
+        <a href="production.html"><strong>Production</strong></a>
+        <a class="cart-link" href="checkout.html">Cart <span class="cart-count">0</span></a>
+        <a class="pill" href="mailto:hello@amstationstudio.com">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>M-C Production — Projects & Collaborations</h1>
+      <p class="subtle">Creating legacies through media and collaboration.</p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="container section">
+    <h2 style="margin:0 0 10px;">Projects</h2>
+    <div class="grid">
+
+      <!-- Project 1 -->
+      <article class="card">
+        <figure class="thumb">
+          <!-- TODO: swap for your real thumbnail -->
+          <img src="images/production/project-eli-teaser.jpg" alt="ELI: A Shadow Emerges — Teaser" />
+          <span class="badge">Teaser</span>
+        </figure>
+        <div class="body">
+          <h3>ELI: A Shadow Emerges</h3>
+          <p class="subtle">Character teaser built from Isla’s fog & rune motifs. 4K vertical + horizontal cuts.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/teasers/eli" target="_blank" rel="noopener">Watch Teaser</a>
+            <a class="btn" href="https://example.com/case-studies/eli" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/project-tombstone-circle.jpg" alt="Tombstone Circle — Micro-Short" />
+          <span class="badge">Micro-Short</span>
+        </figure>
+        <div class="body">
+          <h3>Tombstone Circle</h3>
+          <p class="subtle">One-minute micro-short exploring light vs. shadow inside Isla’s sacred circle.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/films/tombstone-circle" target="_blank" rel="noopener">Watch</a>
+            <a class="btn" href="https://example.com/case-studies/tombstone-circle" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/project-press-reel.jpg" alt="Minott Press Launch Reel" />
+          <span class="badge">Brand Reel</span>
+        </figure>
+        <div class="body">
+          <h3>Minott Press Launch Reel</h3>
+          <p class="subtle">Cinematic brand identity: page turns, foil flashes, and serif-driven typography.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/reels/minott-press" target="_blank" rel="noopener">Watch Reel</a>
+            <a class="btn" href="https://example.com/case-studies/minott-press" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/project-designs-showcase.jpg" alt="AM Designs Showcase" />
+          <span class="badge">Showcase</span>
+        </figure>
+        <div class="body">
+          <h3>AM Designs Showcase</h3>
+          <p class="subtle">Interior storytelling: airy palettes, natural textures, and human-centric motion.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/showcase/am-designs" target="_blank" rel="noopener">Watch</a>
+            <a class="btn" href="https://example.com/case-studies/am-designs" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/project-oracle-voice.jpg" alt="Oracle Voice — Audio ID" />
+          <span class="badge">Audio ID</span>
+        </figure>
+        <div class="body">
+          <h3>Oracle Voice</h3>
+          <p class="subtle">Voice branding & sound design evoking Isla’s wind, water, and ember runes.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/audio/oracle-voice" target="_blank" rel="noopener">Listen</a>
+            <a class="btn" href="https://example.com/case-studies/oracle-voice" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 6 -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/project-black-gold-studio.jpg" alt="Black & Gold Studio IDs" />
+          <span class="badge">Studio IDs</span>
+        </figure>
+        <div class="body">
+          <h3>Black & Gold Studio IDs</h3>
+          <p class="subtle">High-contrast title cards, metallic accents, and motion-tracked rune flares.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://example.com/ids/black-gold" target="_blank" rel="noopener">Watch</a>
+            <a class="btn" href="https://example.com/case-studies/black-gold" target="_blank" rel="noopener">Case Study</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SERVICE PACKAGES (real titles, SKUs, prices) -->
+  <section class="container section">
+    <h2 style="margin:0 0 10px;">Production Services</h2>
+    <div class="grid">
+      <!-- Package 1: Brand Story Video -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/pkg-brand-story.jpg" alt="Brand Story Video package" />
+          <span class="badge">Package</span>
+        </figure>
+        <div class="body">
+          <h3>Brand Story Video</h3>
+          <p class="subtle">1 shoot day, 60–90s hero cut, captions, and 3x short social cuts. Direction + edit + color.</p>
+          <div class="actions">
+            <span class="subtle">From $2,500</span>
+            <button class="btn primary"
+              onclick="addToCart({sku:'PROD-BRAND-STORY-DEP',name:'Brand Story Video — Deposit',price:500,image:'images/production/pkg-brand-story.jpg'})">
+              Reserve ($500)
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Package 2: Event Coverage -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/pkg-event-coverage.jpg" alt="Event Coverage package" />
+          <span class="badge">Package</span>
+        </figure>
+        <div class="body">
+          <h3>Event Coverage</h3>
+          <p class="subtle">Up to 6 hours coverage, highlight film (60–90s), raw selects, music licensing included.</p>
+          <div class="actions">
+            <span class="subtle">$1,800</span>
+            <button class="btn primary"
+              onclick="addToCart({sku:'PROD-EVENT-HL',name:'Event Coverage — Highlight Film',price:1800,image:'images/production/pkg-event-coverage.jpg'})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Package 3: Short Film / Teaser -->
+      <article class="card">
+        <figure class="thumb">
+          <img src="images/production/pkg-teaser.jpg" alt="Short Film / Teaser package" />
+          <span class="badge">Package</span>
+        </figure>
+        <div class="body">
+          <h3>Short Film / Teaser</h3>
+          <p class="subtle">Concept dev, storyboard, half-day shoot, 30–60s teaser, titles, and sound design.</p>
+          <div class="actions">
+            <span class="subtle">$1,200</span>
+            <button class="btn primary"
+              onclick="addToCart({sku:'PROD-TEASER',name:'Short Film / Teaser',price:1200,image:'images/production/pkg-teaser.jpg'})">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- COLLABORATE FORM -->
+  <section class="container section">
+    <div class="card">
+      <div class="body">
+        <h2 style="margin:0 0 6px;">Collaborate</h2>
+        <p class="subtle">Pitch a project or partnership with Minott-Cajero Production.</p>
+        <form onsubmit="event.preventDefault(); alert('Thanks! I’ll email you shortly.');">
+          <div class="grid" style="gap:12px;">
+            <div><label>Your Name<br/><input placeholder="Your full name" required></label></div>
+            <div><label>Email<br/><input type="email" placeholder="you@example.com" required></label></div>
+          </div>
+          <div><label>Project Title<br/><input placeholder="Working title"></label></div>
+          <div><label>Overview<br/><textarea rows="5" placeholder="What are we making together?"></textarea></label></div>
+          <button class="btn primary" type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <section class="container footer">
+    <p>© <span id="year"></span> The AM Station Studio • M-C Production</p>
+  </section>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
