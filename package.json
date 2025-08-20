@@ -1,0 +1,9 @@
+{
+  "name": "am-station-studio",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "stripe": "^16.0.0"
+  }
+}
