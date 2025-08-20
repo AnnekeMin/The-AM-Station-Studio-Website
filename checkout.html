@@ -1,27 +1,29 @@
-<!doctype html><html lang="en"><head>
-  <title>Checkout — The AM Station Studio</title>
-  
+<!doctype html>
+<html lang="en">
+<head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — The AM Station Studio</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#f7f6f3; --text:#1f2937; --muted:#6b7280; --brand:#0f766e; --card:#ffffff; --shadow:0 10px 30px rgba(0,0,0,.06); --radius:18px; --accent:var(--brand); }
-    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text)} body{font-family:Inter,system-ui,sans-serif;line-height:1.6}
-    h1,h2,h3,h4{font-family:'Playfair Display',serif;color:#0b1016}
-    a{color:var(--accent)} a:hover{text-decoration:underline}
+    :root{--bg:#f7f6f3;--text:#1f2937;--muted:#6b7280;--card:#fff;--shadow:0 10px 30px rgba(0,0,0,.06);--radius:18px;--accent:#0f766e}
+    *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;line-height:1.6}
+    h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:#0b1016}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
     .container{max-width:1200px;margin:0 auto;padding:24px}
     header.nav{position:sticky;top:0;z-index:50;background:rgba(247,246,243,.9);backdrop-filter:blur(8px);border-bottom:1px solid #e5e7eb}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .logo{display:flex;align-items:center;gap:12px;font-weight:600}
     .logo img{width:40px;height:40px;border-radius:10px;box-shadow:var(--shadow);object-fit:cover}
-    .pill{padding:10px 16px;border-radius:999px;background:var(--accent);color:#fff;box-shadow:var(--shadow);font-weight:600}
     .nav-right{display:flex;gap:14px;align-items:center}
+    .pill{padding:10px 16px;border-radius:999px;background:var(--accent);color:#fff;box-shadow:var(--shadow);font-weight:600}
     .cart-link{position:relative}.cart-count{position:absolute;top:-8px;right:-10px;background:#ef4444;color:#fff;border-radius:999px;padding:2px 6px;font-size:12px}
     .hero{padding:40px 0 16px;text-align:center}
     .table{width:100%;border-collapse:collapse}
     .table th,.table td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}
     .right{text-align:right}
-    .btn{padding:10px 14px;border-radius:12px;border:1px solid #0f766e22;background:#fff;color:var(--accent);font-weight:600;box-shadow:var(--shadow);display:inline-block;cursor:pointer}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid #0f766e22;background:#fff;color:var(--accent);font-weight:600;box-shadow:var(--shadow);cursor:pointer}
     .btn.primary{background:var(--accent);color:#fff}
   </style>
   <script>
@@ -35,63 +37,62 @@
     function updateCartCount(){const n=getCart().reduce((t,x)=>t+x.qty,0);document.querySelectorAll('.cart-count').forEach(b=>b.textContent=n)}
     window.addEventListener('DOMContentLoaded',updateCartCount);
   </script>
-
-</head><body>
-
-<header class="nav">
-  <div class="container nav-inner">
-    <div class="logo">
-      <img alt="AM Station icon" src="" />
-      <div>
-        <div style="font-size:14px; color:#6b7280; letter-spacing:.08em;">THE</div>
-        <div style="font-size:20px;">AM Station Studio</div>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <img src="images/logo-am-station.png" alt="AM Station Studio logo" />
+        <div><div style="font-size:14px;color:#6b7280;letter-spacing:.08em;">THE</div><div style="font-size:20px;">AM Station Studio</div></div>
+      </div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="books.html">Books</a>
+        <a href="designs.html">Designs</a>
+        <a href="production.html">Production</a>
+        <a class="cart-link" href="checkout.html"><strong>Cart</strong> <span class="cart-count">0</span></a>
+        <a class="pill" href="mailto:hello@amstationstudio.com">Contact</a>
       </div>
     </div>
-    <div class="nav-right">
-      <a href="index.html">Home</a>
-      <a href="books.html">Books</a>
-      <a href="designs.html">Designs</a>
-      <a href="production.html">Production</a>
-      <a class="cart-link" href="checkout.html">Cart <span class="cart-count">0</span></a>
-      <a class="pill" href="mailto:hello@amstationstudio.com">Contact</a>
-    </div>
-  </div>
-</header>
-<section class="hero">
-  <div class="container"><h1>Your Cart</h1></div>
-</section>
+  </header>
 
-<section class="container">
-  <table class="table" id="cartTable">
-    <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th class="right">Subtotal</th><th></th></tr></thead>
-    <tbody></tbody>
-  </table>
-  <div style="display:flex; justify-content:flex-end; gap:16px; align-items:center; margin-top:16px;">
-    <strong id="total">$0.00</strong>
-    <button class="btn primary" onclick="alert('This is a demo checkout. Hook up Stripe or Shopify next.')">Proceed to Checkout</button>
-  </div>
-</section>
-<script>
-  function renderCart(){
-    const tbody = document.querySelector('#cartTable tbody');
-    tbody.innerHTML = '';
-    const items = getCart();
-    items.forEach(x=>{
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><div style="display:flex; align-items:center; gap:10px;">
-          <img src="${x.image||''}" alt="" style="width:52px; height:52px; object-fit:cover; border-radius:8px;" />
-          <div><strong>${x.name}</strong><div class="subtle">${x.sku}</div></div>
-        </div></td>
-        <td>${formatCurrency(x.price)}</td>
-        <td><input type="number" min="1" value="${x.qty}" style="width:70px" onchange="updateQty('${x.sku}', parseInt(this.value||1)); renderCart();"></td>
-        <td class="right">${formatCurrency(x.price * x.qty)}</td>
-        <td class="right"><button class="btn" onclick="removeFromCart('${x.sku}'); renderCart();">Remove</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-    document.getElementById('total').textContent = formatCurrency(cartTotal());
-  }
-  window.addEventListener('DOMContentLoaded', renderCart);
-</script>
-</body></html>
+  <section class="hero">
+    <div class="container"><h1>Your Cart</h1></div>
+  </section>
+
+  <section class="container">
+    <table class="table" id="cartTable">
+      <thead><tr><th>Item</th><th>Price</th><th>Qty</th><th class="right">Subtotal</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div style="display:flex;justify-content:flex-end;gap:16px;align-items:center;margin-top:16px;">
+      <strong id="total">$0.00</strong>
+      <button class="btn primary" onclick="alert('Demo checkout — I can hook up Stripe or Shopify for you next.')">Proceed to Checkout</button>
+    </div>
+  </section>
+
+  <script>
+    function renderCart(){
+      const tbody=document.querySelector('#cartTable tbody'); tbody.innerHTML='';
+      const items=getCart();
+      items.forEach(x=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td><div style="display:flex;align-items:center;gap:10px;">
+            <img src="${x.image||''}" alt="" style="width:52px;height:52px;object-fit:cover;border-radius:8px;" />
+            <div><strong>${x.name}</strong><div class="subtle">${x.sku}</div></div>
+          </div></td>
+          <td>${formatCurrency(x.price)}</td>
+          <td><input type="number" min="1" value="${x.qty}" style="width:70px"
+                onchange="updateQty('${x.sku}', parseInt(this.value||1)); renderCart();"></td>
+          <td class="right">${formatCurrency(x.price*x.qty)}</td>
+          <td class="right"><button class="btn" onclick="removeFromCart('${x.sku}'); renderCart();">Remove</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('total').textContent=formatCurrency(cartTotal());
+    }
+    window.addEventListener('DOMContentLoaded',renderCart);
+  </script>
+</body>
+</html>
