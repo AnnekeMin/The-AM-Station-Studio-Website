@@ -70,22 +70,36 @@
     </table>
     <div style="display:flex;justify-content:flex-end;gap:16px;align-items:center;margin-top:16px;">
       <strong id="total">$0.00</strong>
-    <button class="btn primary" onclick="startCheckout()">Proceed to Checkout</button>
+  <button id="checkoutBtn" class="btn primary" onclick="startCheckout()">Proceed to Checkout</button>
 <script>
 async function startCheckout(){
-  const items = (JSON.parse(localStorage.getItem('am_station_cart')||'[]'))
-    .map(x => ({ sku: x.sku, qty: x.qty }));
+  const btn = document.getElementById('checkoutBtn');
+  const items = (JSON.parse(localStorage.getItem('am_station_cart')||'[]')).map(x => ({ sku: x.sku, qty: x.qty }));
   if (!items.length) { alert('Your cart is empty.'); return; }
 
-  const res = await fetch('/api/checkout', { // or '/.netlify/functions/stripe-checkout'
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ items })
-  });
-  const data = await res.json();
-  if (data.url) window.location.href = data.url;
-  else alert('Checkout error — please try again.');
+  btn.disabled = true; btn.textContent = 'Redirecting…';
+  try {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ items })
+    });
+    const text = await res.text();
+    let data;
+    try { data = JSON.parse(text); } catch { throw new Error(text || 'Invalid JSON'); }
+
+    if (res.ok && data.url) {
+      location.href = data.url;
+    } else {
+      alert('Checkout error: ' + (data.error || text || res.status));
+      btn.disabled = false; btn.textContent = 'Proceed to Checkout';
+    }
+  } catch (e) {
+    alert('Network error: ' + e.message);
+    btn.disabled = false; btn.textContent = 'Proceed to Checkout';
+  }
 }
 </script>
+
 </body>
 </html>
