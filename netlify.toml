@@ -1,5 +1,10 @@
+[build]
+  command = ""
+  publish = "."
+
 [functions]
   directory = "functions"
+
 [[redirects]]
   from = "/api/checkout"
   to = "/.netlify/functions/stripe-checkout"
