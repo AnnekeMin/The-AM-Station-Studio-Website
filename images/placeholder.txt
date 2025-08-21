@@ -5,13 +5,13 @@ am-station-studio/
 ├── designs.html
 ├── production.html
 ├── images/
-│   ├── logo-am-station.png
+│   ├── AM Station.png
 │   ├── designs/
 │   │   ├── coastal-living-room.jpg
 │   │   ├── shadow-bedroom.jpg
 │   │   ├── isla-kitchen.jpg
 │   │   └── reading-nook.jpg
 │   └── books/
-│       ├── book-1-cover.jpg
-│       ├── book-2-cover.jpg
-│       └── book-3-cover.jpg
+│       ├── The Pirate Island.png
+│       ├── The pirate island.png
+│       └── 
