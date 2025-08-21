@@ -13,5 +13,5 @@ am-station-studio/
 │   │   └── reading-nook.jpg
 │   └── books/
 │       ├── The Pirate Island.png
-│       ├── The pirate island.png
+│       ├── The pirate island hardcover.png
 │       └── 
